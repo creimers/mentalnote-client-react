@@ -13,9 +13,9 @@ import FilterableNotesList from './modules/FilterableNotesList';
 import './App.css';
 
 var NOTES = [
-  {title: "Nicht vergessen", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
-  {title: "Ganz wichtig", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
-  {title: "Geburtstagsgeschenk Mama", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
+  {id: 1, title: "Nicht vergessen", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
+  {id: 2, title: "Ganz wichtig", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
+  {id: 3, title: "Geburtstagsgeschenk Mama", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
 ];
 
 class App extends Component {
@@ -36,7 +36,7 @@ class App extends Component {
             }
           />
 
-          <FilterableNotesList/>
+          <FilterableNotesList notes={NOTES}/>
 
         </div>
       </MuiThemeProvider>
