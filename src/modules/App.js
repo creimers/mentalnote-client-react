@@ -8,15 +8,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-import FilterableNotesList from './modules/FilterableNotesList';
-
 import './App.css';
-
-var NOTES = [
-  {id: 1, title: "Nicht vergessen", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
-  {id: 2, title: "Ganz wichtig", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
-  {id: 3, title: "Geburtstagsgeschenk Mama", note: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."},
-];
 
 class App extends Component {
   render() {
@@ -36,7 +28,7 @@ class App extends Component {
             }
           />
 
-          <FilterableNotesList notes={NOTES}/>
+          {this.props.children}
 
         </div>
       </MuiThemeProvider>
