@@ -13,6 +13,7 @@ function requestLogin(creds) {
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 function loginSuccess(token) {
+  localStorage.setItem('jwt_token', token)
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,

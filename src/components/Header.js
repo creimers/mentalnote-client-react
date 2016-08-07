@@ -17,26 +17,29 @@ class Header extends Component {
 
     this.handleTitleTap = this.handleTitleTap.bind(this);
     this.handleGoToLogin = this.handleGoToLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleTitleTap() {
     this.props.router.push('/');
   }
 
-  handleGoToLogin(event, object) {
-    if (object.props.primaryText === 'Sign in') {
-      this.props.router.push('/login');
-    }
+  handleGoToLogin(event) {
+    this.props.router.push('/login');
+  }
+
+  handleLogout(event) {
+    this.props.logoutUser();
   }
 
   render() {
     var authButton;
 
     if (this.props.auth.isAuthenticated) {
-      authButton = <MenuItem primaryText="Sign out" />;
+      authButton = <MenuItem onClick={this.handleLogout} primaryText="Sign out" />;
     }
     else {
-      authButton = <MenuItem primaryText="Sign in" leftIcon={<FontIcon className="material-icons">lock_open</FontIcon>} />;
+      authButton = <MenuItem onClick={this.handleGoToLogin} primaryText="Sign in" leftIcon={<FontIcon className="material-icons">lock_open</FontIcon>} />;
     }
 
     return (
@@ -45,7 +48,7 @@ class Header extends Component {
         onTitleTouchTap={this.handleTitleTap}
         iconElementRight={
           <IconMenu
-            onItemTouchTap={this.handleGoToLogin} 
+            //onItemTouchTap={this.handleGoToLogin} 
             iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
             targetOrigin={{horizontal: 'right', vertical: 'top'}}

@@ -8,21 +8,18 @@ function auth(
 
   switch(action.type) {
     case LOGIN_REQUEST:
-      console.log('auth reducer: login request');
       return Object.assign({}, state, {
         isFetching: true,
         isAuthenticated: false,
         user: action.creds
       });
     case LOGIN_SUCCESS:
-      console.log('auth reducer: login success');
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
         errorMessage: ''
       });
     case LOGIN_ERROR:
-      console.log('auth reducer: login failure');
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
