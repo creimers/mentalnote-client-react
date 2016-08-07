@@ -32,8 +32,8 @@ class LoginForm extends Component {
     });
   }
 
-  submitForm() {
-    alert('ding dong');
+  submitForm(model) {
+    this.props.loginUser(model).then(response=> this.refs.loginForm.reset())
   }
 
   render() {
@@ -43,6 +43,7 @@ class LoginForm extends Component {
           onValid={this.enableButton} 
           onInvalid={this.disableButton} 
           onValidSubmit={this.submitForm} 
+          ref="loginForm"
         >
         <div>
           <FormsyText
@@ -63,7 +64,6 @@ class LoginForm extends Component {
           />
         </div>
         <div>
-          <p>{this.state.canSubmit}</p>
           <RaisedButton
             type="submit" 
             label="login"

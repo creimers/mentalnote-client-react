@@ -1,2 +1,5 @@
-# Mental Note Client React
-React version of the mental note project's client.
+# mental notes react client
+
+* JWT authentication
+* reflux
+* consumes a REST api

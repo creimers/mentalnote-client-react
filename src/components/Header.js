@@ -32,7 +32,7 @@ class Header extends Component {
   render() {
     var authButton;
 
-    if (this.state.isAuthenticated) {
+    if (this.props.auth.isAuthenticated) {
       authButton = <MenuItem primaryText="Sign out" />;
     }
     else {

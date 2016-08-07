@@ -10,7 +10,8 @@ class Login extends Component {
     return (
       <div id="Login">
        <Paper zDepth={1}>
-        <LoginForm />
+         <p>{this.props.auth.errorMessage}</p>
+        <LoginForm {...this.props}/>
        </Paper>
       </div>
     )

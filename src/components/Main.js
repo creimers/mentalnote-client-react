@@ -4,16 +4,16 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Header from './Header';
 
-import './App.css';
+import './Main.css';
 
 class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <Header />
+          <Header {...this.props}/>
           <div id="main">
-            {this.props.children}
+            {React.cloneElement(this.props.children, this.props)}
           </div>
         </div>
       </MuiThemeProvider>
