@@ -11,6 +11,7 @@ import App from './components/App';
 import FilterableNotesList from './components/FilterableNotesList';
 import NoteDetail from './components/NoteDetail';
 import Login from './components/views/Login';
+import AddNoteForm from './components/AddNoteForm'
 
 import store, { history } from './store'
 
@@ -22,6 +23,7 @@ const routes = (
       <Route path="/" component={App}>
         <IndexRoute component={FilterableNotesList}/>
         <Route path="/login" component={Login} />
+        <Route path="/add" component={AddNoteForm} />
         <Route path="/:noteId" component={NoteDetail} />
       </Route>
     </Router>

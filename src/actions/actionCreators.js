@@ -80,26 +80,67 @@ export function logoutUser() {
 
 // notes
 export const FETCH_NOTES = 'FETCH_NOTES';
-export const RECEIVE_NOTES_SUCCESS = 'RECEIVE_NOTES_SUCCESS';
-export const RECEIVE_NOTES_ERROR = 'RECEIVE_NOTES_ERROR';
-
 export function fetchNotes() {
   return {
-    type: FETCH_NOTES
+    type: FETCH_NOTES,
+    isFetching: false
   }
 }
 
-export const ADD_NOTE = 'ADD_NOTE';
-export const UPDATE_NOTE = 'UPDATE_NOTE';
-export const DELETE_NOTE = 'DELETE_NOTE';
+export const RECEIVE_NOTES_SUCCESS = 'RECEIVE_NOTES_SUCCESS';
+export const RECEIVE_NOTES_ERROR = 'RECEIVE_NOTES_ERROR';
 
+export const ADD_NOTE = 'ADD_NOTE';
 export function addNote(note) {
+  return function(dispatch) {
+    var token = localStorage.getItem('jwt_token')
+
+    var config = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `JWT ${token}`
+      },
+      method: "POST",
+      mode: 'cors',
+      body: JSON.stringify(note)
+    }
+
+    return fetch(BASE_URL + 'notes/', config)
+      .then(response =>
+        response.json().then(json => ({ json, response }))
+      ).then(({ json, response }) => {
+        if (!response.ok) {
+          dispatch(addNoteError(json.detail))
+        }
+        else {
+          dispatch(addNoteSuccess(json))
+        }
+        return response
+
+      }).catch(err => console.log(err))
+  }
+}
+
+export const ADD_NOTE_SUCCESS = 'ADD_NOTE_SUCCESS';
+export function addNoteSuccess(note) {
   return {
-    type: ADD_NOTE,
+    type: ADD_NOTE_SUCCESS,
+    isFetching: false,
     note: note
   }
 }
 
+export const ADD_NOTE_ERROR = 'ADD_NOTE_ERROR';
+export function addNoteError(message) {
+  return {
+    type: ADD_NOTE_ERROR,
+    isFetching: false,
+    errorMessage: message
+  }
+}
+
+export const DELETE_NOTE = 'DELETE_NOTE';
 export function deleteNote(noteId) {
   return {
     type: DELETE_NOTE,
@@ -107,6 +148,7 @@ export function deleteNote(noteId) {
   }
 }
 
+export const UPDATE_NOTE = 'UPDATE_NOTE';
 export function updateNote(note) {
   return {
     type: DELETE_NOTE,

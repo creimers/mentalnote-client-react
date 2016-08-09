@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter  } from 'react-router'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -21,4 +22,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
