@@ -1,4 +1,6 @@
 // auth
+const BASE_URL = 'http://localhost:8000/v1/'
+
 export const LOGOUT_SUCESS = 'LOGOUT_SUCESS';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -42,7 +44,7 @@ export function loginUser(creds) {
       'Content-Type': 'application/json'
     })
 
-    var request = new Request('http://localhost:8000/v1/authenticate/', 
+    var request = new Request(BASE_URL + 'authenticate/', 
       {
         method: "POST",
         mode: 'cors',
@@ -66,7 +68,6 @@ export function loginUser(creds) {
     }).catch(err => console.log(err))
   }
 }
-
 
 export function logoutUser() {
   localStorage.removeItem('jwt_token');
