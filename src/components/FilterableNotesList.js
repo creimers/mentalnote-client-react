@@ -6,9 +6,8 @@ import AddNote from './AddNote';
 
 
 class FilterableNotesList extends Component {
-  componentDidMount(){
-    //debugger
-    // get notes
+  componentWillMount(){
+    this.props.fetchNotes()
   }
 
   render() {

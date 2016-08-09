@@ -81,14 +81,52 @@ export function logoutUser() {
 // notes
 export const FETCH_NOTES = 'FETCH_NOTES';
 export function fetchNotes() {
-  return {
-    type: FETCH_NOTES,
-    isFetching: false
+  return function(dispatch) {
+    var token = localStorage.getItem('jwt_token')
+
+    var config = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `JWT ${token}`
+      },
+      method: 'GET',
+      mode: 'cors',
+    }
+
+    return fetch(BASE_URL + 'notes/', config)
+      .then(response =>
+        response.json().then(json => ({ json, response }))
+      ).then(({ json, response }) => {
+        if (!response.ok) {
+          dispatch(fetchNotesError(json.detail))
+        }
+        else {
+          dispatch(fetchNotesSuccess(json))
+        }
+        return response
+
+      }).catch(err => console.log(err))
   }
 }
 
-export const RECEIVE_NOTES_SUCCESS = 'RECEIVE_NOTES_SUCCESS';
-export const RECEIVE_NOTES_ERROR = 'RECEIVE_NOTES_ERROR';
+export const FETCH_NOTES_SUCCESS = 'FETCH_NOTES_SUCCESS';
+function fetchNotesSuccess(notes) {
+  return {
+    type: FETCH_NOTES_SUCCESS,
+    isFetching: false,
+    notes: notes
+  }
+}
+
+export const FETCH_NOTES_ERROR = 'FETCH_NOTES_ERROR';
+function fetchNotesError(message) {
+  return {
+    type: FETCH_NOTES_ERROR,
+    isFetching: false,
+    errorMessage: message
+  }
+}
 
 export const ADD_NOTE = 'ADD_NOTE';
 export function addNote(note) {
